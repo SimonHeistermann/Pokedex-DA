@@ -1,0 +1,50 @@
+.filter__container {
+    background-color: #2c2c2c;
+    color: white;
+    border-radius: 0px 0px 8px 8px;
+    position: absolute;
+    box-shadow: -1px 10px 12px 1px #a7a3a3;
+    z-index: 10000;
+    flex-direction: column;
+    gap: 8px;
+    display: none;
+    width: auto;
+    min-width: 200px;
+    padding: 16px;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    font-size: 16px;
+}
+
+.show__filtercontainer {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+.filter__container::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: 0px;
+    width: 93px;
+    height: 30px;
+    background-color: #ED5834;
+}
+
+.filter__box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.filter__box input {
+    accent-color: #F8C64F;
+}
+
+@media(max-width: 1025px) {
+    .filter__container::before {
+        width: 93px;
+    }
+}
