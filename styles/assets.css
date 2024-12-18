@@ -32,3 +32,68 @@
     height: 32px;
     width: 32px;
 }
+
+.leftback__button {
+    background: transparent;
+    border: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: 41px;
+}
+
+.leftback__button img {
+    height: 32px;
+    width: 32px;
+}
+
+.heart__button {
+    background: transparent;
+    border: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: 41px;
+}
+
+.heart__button img {
+    height: 32px;
+    width: 32px;
+    opacity: 0.4;
+}
+
+.morepokemon__button {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #c30202;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+}
+
+.morepokemon__button:hover {
+    background-color: #cb0101;
+    transform: scale(1.05); 
+}
+
+.morepokemon__button:active {
+    transform: scale(1.025); 
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); 
+}
+
+.morepokemon__button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.5);
+}
+
+.morepokemon__button img {
+    height: 32px;
+    width: 32px;
+}

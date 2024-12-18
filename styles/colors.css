@@ -1,0 +1,189 @@
+.bgcolor__grass1 {
+    background-color: #D4E9DC;
+}
+
+.bgcolor__grass2 {
+    background-color: rgb(203, 222, 223);
+}
+
+.bgcolor__grass3 {
+    background-color: rgb(175,189,175);
+}
+
+.bgcolor__fire1 {
+    background-color: rgb(223, 193, 154);
+}
+
+.bgcolor__fire2 {
+    background-color: rgb(184,135,116);
+}
+
+.bgcolor__fire3 {
+    background-color: rgb(206,171,132);
+}
+
+.bgcolor__water1 {
+    background-color: rgb(157, 194, 205);
+}
+
+.bgcolor__water2 {
+    background-color: rgb(163, 172, 198);
+}
+
+.bgcolor__water3 {
+    background-color: rgb(167, 192, 224);
+}
+
+.bgcolor__bug1 {
+    background-color: rgb(159,189,131);
+}
+
+.bgcolor__bug2 {
+    background-color: rgb(140, 182, 137);
+}
+
+.bgcolor__bug3 {
+    background-color: rgb(148, 171, 127);
+}
+
+.bgcolor__normal1 {
+    background-color: rgb(134, 123, 85);
+}
+
+.bgcolor__normal2 {
+    background-color: rgb(162, 149, 101);
+}
+
+.bgcolor__normal3 {
+    background-color: rgb(142, 130, 88);
+}
+
+.bgcolor__poison1 {
+    background-color: rgb(154, 95, 153);
+}
+
+.bgcolor__poison2 {
+    background-color: rgb(129, 82, 128);
+}
+
+.bgcolor__poison3 {
+    background-color: rgb(134, 90, 133)
+}
+
+.bgcolor__fairy {
+    background-color: rgb(206, 143, 205);
+}
+
+.bgcolor__ground {
+    background-color: rgb(226, 199, 130);
+}
+
+.bgcolor__electric {
+    background-color: rgb(249, 211, 61);
+}
+
+.bgcolor__fighting {
+    background-color: rgb(179, 61, 57);
+}
+
+.bgcolor__psychic {
+    background-color: rgb(247, 100, 144);
+}
+
+.bgcolor__rock {
+    background-color: rgb(173, 154, 59);
+}
+
+.bgcolor__ice {
+    background-color: rgb(159, 220, 217);
+}
+
+.bgcolor__dragon {
+    background-color: rgb(203, 78, 29);
+}
+
+.bgcolor__dark {
+    background-color: rgb(66, 66, 66);
+}
+
+.bgcolor__ghost {
+    background-color: rgb(113, 95, 137);
+}
+
+.bgcolor__steel {
+    background-color: rgb(183,183,206);
+}
+
+.color__grass {
+    color: #D4E9DC;
+}
+
+.color__fire {
+    color: rgb(184, 135, 116);
+}
+
+.color__water {
+    color: rgb(157, 194, 205);
+}
+
+.color__bug {
+    color: rgb(159, 189, 131);
+}
+
+.color__normal {
+    color: rgb(134, 123, 85);
+}
+
+.color__poison {
+    color: rgb(202, 132, 201);
+}
+
+.color__fairy {
+    color: rgb(206, 143, 205);
+}
+
+.color__ground {
+    color: rgb(226, 199, 130);
+}
+
+.color__electric {
+    color: rgb(249, 211, 61);
+}
+
+.color__fighting {
+    color: rgb(179, 61, 57);
+}
+
+.color__psychic {
+    color: rgb(247, 100, 144);
+}
+
+.color__rock {
+    color: rgb(173, 154, 59);
+}
+
+.color__ice {
+    color: rgb(159, 220, 217);
+}
+
+.color__dragon {
+    color: rgb(203, 78, 29);
+}
+
+.color__dark {
+    color: rgb(66, 66, 66);
+}
+
+.color__ghost {
+    color: rgb(113, 95, 137);
+}
+
+.color__steel {
+    color: rgb(183, 183, 206);
+}
+
+.color__dnone {
+    display: none !important;
+}
+
+

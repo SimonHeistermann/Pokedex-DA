@@ -1,7 +1,7 @@
 footer {
     min-height: 60px;
     background: #ffffff;
-    box-shadow: 1px -3px 10px 0px #b9b8b8;
+    box-shadow: 1px -3px 8px 0px #00000054;
     display: flex;
     align-items: center;
 }
@@ -28,7 +28,7 @@ footer {
 
 .footer__linksextra:hover, .footer__linksextra:active {
     cursor: pointer;
-    color: #ED5834;
+    color: #c30202;
 }
 
 .footer__credits {

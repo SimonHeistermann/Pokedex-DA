@@ -14,73 +14,67 @@
     <link rel="stylesheet" type="text/css" href="./styles/standard.css">
     <link rel="stylesheet" type="text/css" href="./styles/filter.css">
     <link rel="stylesheet" type="text/css" href="./styles/pokedex.css">
+    <link rel="stylesheet" type="text/css" href="./styles/colors.css">
+    <link rel="stylesheet" type="text/css" href="./styles/detailed.css">
+    <link rel="stylesheet" type="text/css" href="./styles/overlay.css">
     <link rel="stylesheet" type="text/css" href="./styles/footer.css">
     <link rel="stylesheet" type="text/css" href="./styles/assets.css">
-
 
     <script src="./scripts/storage.js"></script>
     <script src="./scripts/save.js"></script>
     <script src="./script.js"></script>
     <script src="./scripts/structure_templates.js"></script>
     <script src="./scripts/templates.js"></script>
+    <script src="./scripts/bgcolors.js"></script>
     <script src="./scripts/search.js"></script>
     <script src="./scripts/assets.js"></script>
 </head>
-<body onload="init()">
-    <header>
-        <div class="header__container">
-            <div class="pokeball__background"></div>
-            <div class="header__box">
-                <button class="menu__button">
-                    <img src="./assets/icons/menu_icon_white.png" alt="Menu">
-                </button>
-                <h1 class="header__headline">Welches Pokémon suchst du?</h1>
-                <div class="header__searchbox">
-                    <form onsubmit="" class="searchbar__container">
-                        <label for="search_input">
-                            <img class="searchbar__logo" src="./assets/icons/magnifier_icon_white.png" alt="Lupe-Icon">
-                        </label>
-                        <input class="searchbar" oninput="" id="search_input" type="text" placeholder="Suche Pokémon">
-                    </form>
-                    <button id="filter_button" class="filter__button">
-                        <img src="./assets/icons/filter_icon_white.png" alt="Filter">
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
+<body id="body" onload="init()">
     <main id="main_section">
-        <div id="pokedex_section" class="pokedex__section">
-            <div class="pokemon__card">
-                <h3>#001</h3>
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="Bulbasaur">
-                <h2>Bulbasaur</h2>
+        <div class="pokeball__background"></div>
+        <div class="pokeball__background2"></div>
+        <div class="mpokemon__details">
+            <div class="details__header">
+                <button class="leftback__button">
+                    <img src="./assets/icons/back_icon_white.png" alt="Back">
+                </button>
+                <div class="pokemoncard__textbox">
+                    <h1>Bulbasaur</h1>
+                    <h3>001</h3>
+                </div>
+                <button class="heart__button">
+                    <img src="./assets/icons/heart_icon_white.png" alt="Heart">
+                </button>
+            </div>
+            <div class="details__centralbox bgcolor__grass1">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="">
                 <div class="types__container">
-                    <div class="type__box">
+                    <div class="type__box color__grass">
                         <img src="./assets/icons/icon_grass.png" alt="Grass">
                         Grass
                     </div>
-                    <div class="type__box">
-                        <img src="./assets/icons/icon_grass.png" alt="Grass">
-                        Grass
+                    <div class="type__box color__poison">
+                        <img src="./assets/icons/icon_poison.png" alt="Grass">
+                        Poison
                     </div>
                 </div>
             </div>
-            <div class="pokemon__card">
-                <h3>#001</h3>
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="Bulbasaur">
-                <h2>Bulbasaur</h2>
-                <div class="types__container">
-                    <div class="type__box">
-                        <img src="./assets/icons/icon_grass.png" alt="Grass">
-                        Grass
+            <div class="details__informationbox">
+                <nav>
+                    <div class="nav__container">
+                        <button class="navbutton__open" id="nav_about" onclick="">About</button>
+                        <button class="" id="nav_stats" onclick="">Stats</button>
+                        <button class="" id="nav_moves" onclick="">Moves</button>
+                        <button class="" id="nav_evolutions" onclick="">Evolutions</button>
                     </div>
-                    <div class="type__box">
-                        <img src="./assets/icons/icon_grass.png" alt="Grass">
-                        Grass
+                </nav>
+                <div id="detailed__information" class="detailed__information">
+                    <div class="stats__section">
+                        
                     </div>
                 </div>
             </div>
+            
         </div>
     </main>
 </body>

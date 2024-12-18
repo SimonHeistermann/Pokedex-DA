@@ -1,0 +1,13 @@
+.overlay {
+    background-color: #5b5b5b;
+    min-height: 100vh;
+    width: min(100%, 1920px);
+    margin-inline: auto;
+    padding-inline: clamp(16px, 6vw, 64px);
+    padding-top: 32px;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
