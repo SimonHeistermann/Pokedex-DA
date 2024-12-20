@@ -1,16 +1,17 @@
 let pokemonList;
 let pokemonDetails;
+let currentDetails = 'about';
 
 let offset = 0;
 const limit = 20;
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
 
 function init() {
-    // renderStandardStructure();
-    // fetchPokemonList().then(() => {
-    //     displayPokemonList();
-    //     renderMorePokemonButton();
-    // });
+    renderStandardStructure();
+    fetchPokemonList().then(() => {
+        displayPokemonList();
+        renderMorePokemonButton();
+    });
 }
 
 function renderStandardStructure() {
@@ -58,11 +59,15 @@ function renderPokemonList(container, pokemon) {
 }
 
 async function openPokemonDetails(pokemonID) {
-    const selectedPokemonDetails = await fetchPokemonDetails(`https://pokeapi.co/api/v2/pokemon/${pokemonID}`);
-    const pokemonDescription = await fetchPokemonDescription(pokemonID);
-
     renderOverlayStructure();
+    const selectedPokemonDetails = await getPokemonDetails(pokemonID);
+    const pokemonDescription = await fetchPokemonDescription(pokemonID);
     openOverlay(selectedPokemonDetails, pokemonDescription);
+}
+
+async function getPokemonDetails(pokemonID) {
+    const selectedPokemonDetails = await fetchPokemonDetails(`https://pokeapi.co/api/v2/pokemon/${pokemonID}`);
+    return selectedPokemonDetails;
 }   
 
 async function fetchPokemonDescription(pokemonID) {
@@ -112,7 +117,7 @@ function renderDetailedAbout(pokemon, pokemonDescription) {
     } 
 }
 
-function renderMorePokemonButton(container) {
+function renderMorePokemonButton() {
     let contentRef = document.getElementById('morepokemonbutton_section');
     if(contentRef) {
         contentRef.innerHTML += renderHTMLMorePokemonButton();
@@ -126,13 +131,76 @@ function displayMorePokemon() {
     });
 }
 
-async function displayFullPokemonList() {
-    const contentRef = document.getElementById('pokedex_section');
-    for (const pokemon of pokemonList) {
-        pokemonDetails = await fetchPokemonDetails(pokemon.url);
-        renderPokemonList(contentRef, pokemonDetails);
+async function openDetailedStats(pokemonID, navButtonRef) {
+    currentDetails = 'stats';
+    const selectedPokemonDetails = await getPokemonDetails(pokemonID);
+    const natureName = getRandomNatureName();
+    changeNavButtonStyling(navButtonRef);
+    renderDetailedStats(selectedPokemonDetails);
+    loadDynamicNatureDescription(selectedPokemonDetails, natureName);
+}
+
+async function renderDetailedStats(pokemon) {
+    const contentRef = document.getElementById('detailed_information');
+    if (contentRef) {
+        contentRef.innerHTML = "";
+        contentRef.innerHTML += renderHTMLDetailedStats(pokemon);
     }
 }
+
+async function openDetailedAbout(pokemonID, navButtonRef) {
+    currentDetails = 'about';
+    const selectedPokemonDetails = await getPokemonDetails(pokemonID);
+    const pokemonDescription = await fetchPokemonDescription(pokemonID);
+    changeNavButtonStyling(navButtonRef);
+    renderDetailedAbout(selectedPokemonDetails, pokemonDescription);
+}
+
+function getRandomNatureName() {
+    const natures = [
+        "Hardy", "Lonely", "Brave", "Adamant", "Naughty", 
+        "Bold", "Docile", "Relaxed", "Impish", "Lax", 
+        "Timid", "Hasty", "Serious", "Jolly", "Naive", 
+        "Modest", "Mild", "Quiet", "Bashful", "Rash", 
+        "Calm", "Gentle", "Sassy", "Careful", "Quirky", 
+        "Mild", "Hasty"
+    ];
+    return natures[Math.floor(Math.random() * natures.length)];
+}
+
+async function fetchNature(natureName) {
+    const lowerCaseNatureName = toLowerCaseHelper(natureName);
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/nature/${lowerCaseNatureName}`);
+        if (!response.ok) {
+            throw new Error("Nature not found");
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(`Error fetching details for nature: ${natureName}`, error);
+        return null;
+    }
+}
+
+async function loadDynamicNatureDescription(pokemon, natureName) {
+    const contentRef = document.getElementById('nature_description');
+    if (natureName) {
+        const natureDetails = await fetchNature(natureName);
+        if (natureDetails) {
+            const increasedStat = natureDetails.increased_stat?.name || "none";
+            const decreasedStat = natureDetails.decreased_stat?.name || "none";
+            const description = `Based on this Pokémon's stats, we consider the best nature for ${capitalizeFirstLetter(pokemon.name)} to have is <b class="naturetext__bold">${natureName}</b>. This will increase its <b class="naturetext__bold">${increasedStat}</b> and decrease its <b class="naturetext__bold">${decreasedStat}</b> stats.`;
+            contentRef.innerHTML = description;
+        } else contentRef.innerHTML = "Nature details could not be loaded.";
+    } else contentRef.innerHTML = "Nature could not be determined.";
+}
+
+
+
+
+
+
+
 
 
 

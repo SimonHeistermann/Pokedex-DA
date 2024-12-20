@@ -79,10 +79,10 @@ function renderHTMLDetailedStructure(pokemon) {
             <div class="details__informationbox">
                 <nav>
                     <div class="nav__container">
-                        <button class="navbutton__open" id="nav_about" onclick="">About</button>
-                        <button class="" id="nav_stats" onclick="">Stats</button>
-                        <button class="" id="nav_moves" onclick="">Moves</button>
-                        <button class="" id="nav_evolutions" onclick="">Evolutions</button>
+                        <button class="navbutton__open" id="nav_about" onclick="openDetailedAbout(${pokemon.id}, 'about')">About</button>
+                        <button class="" id="nav_stats" onclick="openDetailedStats(${pokemon.id}, 'stats')">Stats</button>
+                        <button class="" id="nav_moves" onclick="openDetailedMoves(${pokemon.id}, 'moves')">Moves</button>
+                        <button class="" id="nav_evolutions" onclick="openDetailedEvolutions(${pokemon.id}, 'evolutions')">Evolutions</button>
                     </div>
                 </nav>
                 <div id="detailed_information" class="detailed__information">

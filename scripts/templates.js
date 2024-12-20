@@ -54,3 +54,57 @@ function renderHTMLMorePokemonButton() {
             </button>
             `;  
 }
+
+function renderHTMLDetailedStats(pokemon) {
+    const stats = getPokemonStats(pokemon);
+    let topTwoStats = getTopTwoStats(stats);
+    return  `
+            <div id="stats" class="stats__section">
+                <div class="stat">
+                    <span class="stat__text">${formatStatName(pokemon.stats[0].stat.name)}</span>
+                    <span class="stats">${pokemon.stats[0].base_stat}</span>
+                    <div class="stat__bar">
+                        <div class="stat__bar__fill ${getBarColor(formatStatName(pokemon.stats[0].stat.name), topTwoStats, pokemon)}" style="width: ${pokemon.stats[0].base_stat}%;"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <span class="stat__text">${formatStatName(pokemon.stats[1].stat.name)}</span>
+                    <span class="stats">${pokemon.stats[1].base_stat}</span>
+                    <div class="stat__bar">
+                        <div class="stat__bar__fill ${getBarColor(formatStatName(pokemon.stats[1].stat.name), topTwoStats, pokemon)}" style="width: ${pokemon.stats[1].base_stat}%;"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <span class="stat__text">${formatStatName(pokemon.stats[2].stat.name)}</span>
+                    <span class="stats">${pokemon.stats[2].base_stat}</span>
+                    <div class="stat__bar">
+                        <div class="stat__bar__fill ${getBarColor(formatStatName(pokemon.stats[2].stat.name), topTwoStats, pokemon)}" style="width: ${pokemon.stats[2].base_stat}%;"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <span class="stat__text">${formatStatName(pokemon.stats[3].stat.name)}</span>
+                    <span class="stats">${pokemon.stats[3].base_stat}</span>
+                    <div class="stat__bar">
+                        <div class="stat__bar__fill ${getBarColor(formatStatName(pokemon.stats[3].stat.name), topTwoStats, pokemon)}" style="width: ${pokemon.stats[3].base_stat}%;"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <span class="stat__text">${formatStatName(pokemon.stats[4].stat.name)}</span>
+                    <span class="stats">${pokemon.stats[4].base_stat}</span>
+                    <div class="stat__bar">
+                        <div class="stat__bar__fill ${getBarColor(formatStatName(pokemon.stats[4].stat.name), topTwoStats, pokemon)}" style="width: ${pokemon.stats[4].base_stat}%;"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <span class="stat__text">${formatStatName(pokemon.stats[5].stat.name)}</span>
+                    <span class="stats">${pokemon.stats[5].base_stat}</span>
+                    <div class="stat__bar">
+                        <div class="stat__bar__fill ${getBarColor(formatStatName(pokemon.stats[5].stat.name), topTwoStats, pokemon)}" style="width: ${pokemon.stats[5].base_stat}%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="nature__description" id="nature_description">
+                            
+            </div>
+            `
+}

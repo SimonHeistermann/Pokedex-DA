@@ -61,3 +61,19 @@
                     pokemonDetails = await fetchPokemonDetails(pokemon.url);
                     renderPokemonList(contentRef, pokemonDetails);
                 }
+
+                async function getNatureName() {
+                    try {
+                        const response = await fetch('https://pokeapi.co/api/v2/nature/');
+                        const data = await response.json();
+                        const natures = data.results;
+                        for (const nature of natures) {
+                            const natureDetails = await fetchNature(nature.name);
+                            if ( natureDetails.increased_stat?.name === stats.increased_stat && natureDetails.decreased_stat?.name === stats.decreased_stat) return nature.name;
+                        }
+                        return "neutral"; 
+                    } catch (error) {
+                        console.error("Error fetching nature name", error);
+                        return null;
+                    }
+                }
