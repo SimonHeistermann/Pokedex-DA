@@ -4,9 +4,21 @@ function renderPokemonCardHTML(pokemon) {
     return `
         <div onclick="openPokemonDetails(${pokemon.id})" class="pokemon__card ${createBackgroundWithID(backgroundClass, pokemon.id)}">
             <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}">
-            <div class="pokemoncard__textbox">
-                <h2>${capitalizeFirstLetter(pokemon.name)}</h2>
-                <h3>${formatId(pokemon.id)}</h3>
+            <div class="pokemoncard__bottombox">
+                <div class="pokemoncard__textbox">
+                    <h2>${capitalizeFirstLetter(pokemon.name)}</h2>
+                    <h3>${formatId(pokemon.id)}</h3>
+                </div>
+                <div class="types__containerstart">
+                    <div class="type__box color__${pokemon.types[0].type.name}">
+                        <img src="./assets/icons/icon_${pokemon.types[0].type.name}.png" alt="${pokemon.types[0].type.name}">
+                        ${pokemon.types[0].type.name}
+                    </div>
+                    <div class="type__box color__${checkIf2TypesColor(pokemon)}">
+                        <img src="./assets/icons/icon_${checkIf2TypesImg(pokemon)}.png" alt="${checkIf2TypesImg(pokemon)}">
+                        ${checkIf2TypesImg(pokemon)}
+                    </div>
+                </div>
             </div>
         </div>
     `;

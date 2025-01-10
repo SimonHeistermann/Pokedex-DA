@@ -1,3 +1,7 @@
+function reloadWebsite() {
+    location.href = location.href;
+}
+
 function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -77,7 +81,7 @@ function changeNavButtonStyling(buttonRef) {
 }
 
 function removeStylingfromAllNavButtons() {
-    navButtonIDs = ["about", "stats", "moves", "evolutions"];
+    navButtonIDs = ["about", "stats"];
     navButtonIDs.forEach(navButton => {
         const navButtonRef = document.getElementById('nav_' + navButton);
         navButtonRef.classList.remove('navbutton__open');
@@ -112,6 +116,21 @@ function getBarColor(stat, topTwoStats, pokemon) {
             return backgroundClass;
         }
     }
+}
+
+function toggleDisplayLoadingSpinner() {
+    const spinnerRef = document.getElementById('loadingspinner_overlay');
+    if(spinnerRef) spinnerRef.classList.toggle('d__none');
+}
+
+function displayLoadingSpinner() {
+    toggleDisplayLoadingSpinner();
+    fixateScrollingOnBody();
+}
+
+function removeLoadingSpinner() {
+    toggleDisplayLoadingSpinner();
+    releaseScrollOnBody();
 }
 
 

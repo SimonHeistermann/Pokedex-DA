@@ -11,3 +11,140 @@
     left: 0;
     overflow: hidden;
 }
+
+.loadingspinner__overlay {
+    background-color: #5b5b5bc5;
+    min-height: 100vh;
+    width: min(100%, 1920px);
+    margin-inline: auto;
+    padding-inline: clamp(16px, 6vw, 64px);
+    padding-top: 32px;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.loadingspinner__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.pokeball__spinner {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #5b5b5bc5;
+    position: relative;
+    border: 8px solid #2222228e; 
+    animation: spin 2s linear infinite;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.pokeball__spinner::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 8px;
+    background-color: #2222228e;
+    transform: translate(-50%, -50%);
+    border-radius: 12px;
+}
+
+.pokeball__middlecircle {
+    width: 35px; 
+    height: 35px;
+    border-radius: 50%;
+    background-color: #5b5b5bc5; 
+    border: 8px solid #22222256; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.loading__text {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.dots::after {
+    content: " .";
+    display: inline-block;
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0% {
+        content: " .";
+    }
+    20% {
+        content: " ..";
+    }
+    40% {
+        content: " ...";
+    }
+    60% {
+        content: " ..";
+    }
+    80% {
+        content: " .";
+    }
+    100% {
+        content: " .";
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media(min-width: 500px) {
+    .overlay {
+        background-color: #5b5b5bb6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pokeball__spinner {
+        width: 150px;
+        height: 150px;
+        border: 12px solid #2222228e; 
+    }
+
+    .pokeball__spinner::before {
+        height: 12px;
+    }
+
+    .pokeball__middlecircle {
+        width: 45px; 
+        height: 45px;
+        border: 12px solid #2222228e; 
+    }
+
+    .loading__text {
+        font-size: 20px;
+    }
+}

@@ -9,14 +9,14 @@ function renderHTMLStandardStructure() {
                         </button>
                         <h1 class="header__headline">Welches Pokémon suchst du?</h1>
                         <div class="header__searchbox">
-                            <form onsubmit="" class="searchbar__container">
+                            <form onsubmit="filterPokemon(event)" class="searchbar__container">
                                 <label for="search_input">
                                     <img class="searchbar__logo" src="./assets/icons/magnifier_icon_white.png" alt="Lupe-Icon">
                                 </label>
-                                <input class="searchbar" oninput="" id="search_input" type="text" placeholder="Suche Pokémon">
+                                <input class="searchbar" oninput="filterPokemon(event)" id="search_input" type="text" placeholder="Suche Pokémon">
                             </form>
-                            <button id="filter_button" class="filter__button">
-                                <img src="./assets/icons/filter_icon_white.png" alt="Filter">
+                            <button onclick="reloadWebsite()" id="refresh_button" class="refresh__button">
+                                <img src="./assets/icons/refresh_icon_white.png" alt="Refresh">
                             </button>
                         </div>
                     </div>
@@ -28,7 +28,17 @@ function renderHTMLStandardStructure() {
                 </div>
                 <div class="morepokemonbutton__section" id=morepokemonbutton_section></div>
             </main>
-            <div class="overlay d__none" id="overlay"></div>
+            <div onclick="closeOverlay()" class="overlay d__none" id="overlay"></div>
+            <div id="loadingspinner_overlay" class="loadingspinner__overlay d__none">
+                <div class="pokeball__background"></div>
+                <div class="pokeball__background2"></div>
+                <div class="loadingspinner__box">
+                    <div class="pokeball__spinner">
+                        <div class="pokeball__middlecircle"></div>
+                    </div>
+                    <div class="loading__text"><span class="dots"></span>loading</div>
+                </div>
+            </div>
             <footer>
                 <div class="footer__container">
                     <div class="footer__containerbottom">
@@ -44,7 +54,7 @@ function renderHTMLOverlayStructure() {
     return  `
             <div class="pokeball__background"></div>
             <div class="pokeball__background2"></div>
-            <div id="mpokemon_details" class="mpokemon__details">
+            <div id="mpokemon_details" class="mpokemon__details" onclick="event.stopPropagation()">
             </div>
             `;
 }
@@ -65,6 +75,12 @@ function renderHTMLDetailedStructure(pokemon) {
             </div>
             <div class="details__centralbox ${getBackgroundWithID(pokemon.id)}">
                 <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}">
+                <button onclick="openPrevPokemon(${pokemon.id})" class="prev__pokemonbutton ${pokemon.id === 1 ? 'd__none' : ''}">
+                    <img src="./assets/icons/prev_pokemon_icon_white.png" alt="previos pokemon">
+                </button>
+                <button onclick="openNextPokemon(${pokemon.id})" class="next__pokemonbutton">
+                    <img src="./assets/icons/next_pokemon_icon_white.png" alt="next pokemon">
+                </button>
                 <div class="types__container">
                     <div class="type__box color__${pokemon.types[0].type.name}">
                         <img src="./assets/icons/icon_${pokemon.types[0].type.name}.png" alt="${pokemon.types[0].type.name}">
@@ -81,8 +97,6 @@ function renderHTMLDetailedStructure(pokemon) {
                     <div class="nav__container">
                         <button class="navbutton__open" id="nav_about" onclick="openDetailedAbout(${pokemon.id}, 'about')">About</button>
                         <button class="" id="nav_stats" onclick="openDetailedStats(${pokemon.id}, 'stats')">Stats</button>
-                        <button class="" id="nav_moves" onclick="openDetailedMoves(${pokemon.id}, 'moves')">Moves</button>
-                        <button class="" id="nav_evolutions" onclick="openDetailedEvolutions(${pokemon.id}, 'evolutions')">Evolutions</button>
                     </div>
                 </nav>
                 <div id="detailed_information" class="detailed__information">

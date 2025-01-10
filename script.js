@@ -1,17 +1,27 @@
-let pokemonList;
-let pokemonDetails;
+const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
+let pokemonList = [];
 let currentDetails = 'about';
 
-let offset = 0;
 const limit = 20;
-const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
+let offset = 0;
+let pokemonDetails;
+let pokemonDetailsCache = {};
 
-function init() {
-    renderStandardStructure();
-    fetchPokemonList().then(() => {
-        displayPokemonList();
+let onTouchStart, onTouchEnd;
+
+
+async function init() {
+    try { 
+        renderStandardStructure();
+        displayLoadingSpinner();
+        await loadPokemonListWithCache();
+        await displayPokemonList(); 
         renderMorePokemonButton();
-    });
+        removeLoadingSpinner();
+        fetchAllPokemon();
+    } catch (error) {
+        console.error('Error initializing app:', error);
+    }
 }
 
 function renderStandardStructure() {
@@ -22,23 +32,22 @@ function renderStandardStructure() {
     } 
 }
 
-async function fetchPokemonList() {
-    try {
-        const response = await fetch(`${BASE_URL}?offset=${offset}&limit=${limit}`);
-        const data = await response.json();
-        if (!pokemonList) pokemonList = [];
-        pokemonList.push(...data.results);
-    } catch (error) {
-        console.error("Pokemonliste konnte nicht gelöaden werden!", error);
+async function loadPokemonListWithCache() {
+    const cachedList = localStorage.getItem('pokemonList');
+    if (cachedList) {
+        console.log('Loaded Pokémon list from cache.');
+        pokemonList = JSON.parse(cachedList);
+    } else {
+        await fetchPokemonList();
+        localStorage.setItem('pokemonList', JSON.stringify(pokemonList));
     }
 }
 
-async function fetchPokemonDetails(url) {
-    try {
-        const response = await fetch(url);
-        return response.json();
-    } catch (error) {
-        console.error("Pokemondetails konnten nicht geladen werden!", error)
+function renderMorePokemonButton() {
+    let contentRef = document.getElementById('morepokemonbutton_section');
+    if(contentRef) {
+        contentRef.innerHTML = "";
+        contentRef.innerHTML += renderHTMLMorePokemonButton();
     }
 }
 
@@ -52,6 +61,46 @@ async function displayPokemonList() {
     }
 }
 
+async function fetchPokemonList() {
+    try {
+        const response = await fetch(`${BASE_URL}?offset=${offset}&limit=${limit}`);
+        const data = await response.json();
+        if (!pokemonList) pokemonList = [];
+        pokemonList.push(...data.results);
+    } catch (error) {
+        console.error("Pokemonliste konnte nicht geladen werden!", error);
+    }
+}
+
+async function fetchPokemonDetails(url) {
+    if (pokemonDetailsCache[url]) return pokemonDetailsCache[url]; 
+    try {
+        const response = await fetch(url);
+        const details = await response.json();
+        pokemonDetailsCache[url] = details;
+        return details;
+    } catch (error) {
+        console.error("Pokemondetails konnten nicht geladen werden!", error);
+    }
+}
+
+async function fetchPokemonDescription(pokemonID) {
+    const cache = JSON.parse(localStorage.getItem('pokemonDescriptions')) || {};
+    if (cache[pokemonID]) return cache[pokemonID];
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonID}`);
+        const data = await response.json();
+        const entry = data.flavor_text_entries.find(e => e.language.name === "de") || data.flavor_text_entries.find(e => e.language.name === "en");
+        const description = entry ? entry.flavor_text.replace(/\n|\f/g, " ") : "Keine Beschreibung verfügbar.";
+        cache[pokemonID] = description; 
+        localStorage.setItem('pokemonDescriptions', JSON.stringify(cache));
+        return description;
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Beschreibung", error);
+        return "Fehler beim Laden der Beschreibung.";
+    }
+}
+
 function renderPokemonList(container, pokemon) {
     if(container) {
         container.innerHTML += renderPokemonCardHTML(pokemon);
@@ -59,10 +108,12 @@ function renderPokemonList(container, pokemon) {
 }
 
 async function openPokemonDetails(pokemonID) {
+    displayLoadingSpinner();
     renderOverlayStructure();
     const selectedPokemonDetails = await getPokemonDetails(pokemonID);
     const pokemonDescription = await fetchPokemonDescription(pokemonID);
     openOverlay(selectedPokemonDetails, pokemonDescription);
+    removeLoadingSpinner();
 }
 
 async function getPokemonDetails(pokemonID) {
@@ -70,27 +121,19 @@ async function getPokemonDetails(pokemonID) {
     return selectedPokemonDetails;
 }   
 
-async function fetchPokemonDescription(pokemonID) {
-    try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonID}`);
-        const data = await response.json();
-        const description = data.flavor_text_entries.find(entry => entry.language.name === "de").flavor_text.replace(/\n|\f/g, " ");
-        return  description;
-    } catch (error) {
-        console.error("Fehler beim Abrufen der Pokemon Beschreibung!")
-    }
-}
-
 function openOverlay(selectedPokemonDetails, pokemonDescription) {
     toggleDnoneFromOverlay();
+    currentDetails = "about";
     renderDetailedStructure(selectedPokemonDetails);
     renderDetailedAbout(selectedPokemonDetails, pokemonDescription);
     fixateScrollingOnBody();
+    swipeFunction(selectedPokemonDetails);
 }
 
 function closeOverlay() {
     toggleDnoneFromOverlay();
     releaseScrollOnBody();
+    removeSwipeFunction();
 }
 
 function renderOverlayStructure() {
@@ -117,27 +160,24 @@ function renderDetailedAbout(pokemon, pokemonDescription) {
     } 
 }
 
-function renderMorePokemonButton() {
-    let contentRef = document.getElementById('morepokemonbutton_section');
-    if(contentRef) {
-        contentRef.innerHTML += renderHTMLMorePokemonButton();
-    }
-}
-
-function displayMorePokemon() {
+async function displayMorePokemon() {
+    displayLoadingSpinner();
     offset += limit;
-    fetchPokemonList().then(() => {
-        displayPokemonList();
-    });
+    await fetchPokemonList();
+    await displayPokemonList();
+    removeLoadingSpinner();
+
 }
 
 async function openDetailedStats(pokemonID, navButtonRef) {
+    displayLoadingSpinner();
     currentDetails = 'stats';
     const selectedPokemonDetails = await getPokemonDetails(pokemonID);
     const natureName = getRandomNatureName();
     changeNavButtonStyling(navButtonRef);
     renderDetailedStats(selectedPokemonDetails);
-    loadDynamicNatureDescription(selectedPokemonDetails, natureName);
+    await loadDynamicNatureDescription(selectedPokemonDetails, natureName);
+    removeLoadingSpinner();
 }
 
 async function renderDetailedStats(pokemon) {
@@ -149,11 +189,13 @@ async function renderDetailedStats(pokemon) {
 }
 
 async function openDetailedAbout(pokemonID, navButtonRef) {
+    displayLoadingSpinner();
     currentDetails = 'about';
     const selectedPokemonDetails = await getPokemonDetails(pokemonID);
     const pokemonDescription = await fetchPokemonDescription(pokemonID);
     changeNavButtonStyling(navButtonRef);
     renderDetailedAbout(selectedPokemonDetails, pokemonDescription);
+    removeLoadingSpinner();
 }
 
 function getRandomNatureName() {
@@ -194,6 +236,42 @@ async function loadDynamicNatureDescription(pokemon, natureName) {
         } else contentRef.innerHTML = "Nature details could not be loaded.";
     } else contentRef.innerHTML = "Nature could not be determined.";
 }
+
+async function openNextPokemon(pokemonID) {
+    let newPokemonID;
+    if(pokemonID === 1025) newPokemonID = 1;
+    else newPokemonID = pokemonID + 1;
+    if(newPokemonID <= (offset + limit)) await getAndRenderPrevOrNextPokemon(newPokemonID);
+    else {
+        await displayMorePokemon();
+        await getAndRenderPrevOrNextPokemon(newPokemonID);
+    }
+}
+
+async function openPrevPokemon(pokemonID) {
+    let newPokemonID;
+    if(pokemonID === 1) newPokemonID = 1;
+    else newPokemonID = pokemonID - 1;
+    await getAndRenderPrevOrNextPokemon(newPokemonID);
+}
+
+async function getAndRenderPrevOrNextPokemon(newPokemonID) {
+    displayLoadingSpinner();
+    const selectedPokemonDetails = await getPokemonDetails(newPokemonID);
+    const pokemonDescription = await fetchPokemonDescription(newPokemonID);
+    currentDetails = 'about';
+    renderDetailedStructure(selectedPokemonDetails);
+    renderDetailedAbout(selectedPokemonDetails, pokemonDescription);
+    removeSwipeFunction();
+    swipeFunction(selectedPokemonDetails);
+    removeLoadingSpinner();
+}
+
+
+
+
+
+
 
 
 
