@@ -1,4 +1,4 @@
-.refresh__button {
+.favorites__button {
     background-color: #2c2c2c;
     border-radius: 8px;
     border: 0;
@@ -8,12 +8,12 @@
     height: 41px;
 }
 
-.refresh__button img {
+.favorites__button img {
     height: 32px;
     width: 32px;
 }
 
-.refresh__button:hover {
+.favorites__button:hover {
     cursor: pointer;
     background-color: #3e3e3e;
     border: 0;
@@ -60,6 +60,10 @@
     height: 32px;
     width: 32px;
     opacity: 0.4;
+}
+
+.is__favorite {
+    opacity: 1 !important;
 }
 
 .morepokemon__button {

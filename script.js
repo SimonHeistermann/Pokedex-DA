@@ -1,6 +1,7 @@
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
 let pokemonList = [];
 let currentDetails = 'about';
+let currentPage = 'home';
 
 const limit = 20;
 let offset = 0;
@@ -19,6 +20,7 @@ async function init() {
         renderMorePokemonButton();
         removeLoadingSpinner();
         fetchAllPokemon();
+        loadFavoritePokemons();
     } catch (error) {
         console.error('Error initializing app:', error);
     }
@@ -134,6 +136,7 @@ function closeOverlay() {
     toggleDnoneFromOverlay();
     releaseScrollOnBody();
     removeSwipeFunction();
+    if(currentPage === 'favorites') openFavoritePokemons();
 }
 
 function renderOverlayStructure() {
@@ -265,6 +268,19 @@ async function getAndRenderPrevOrNextPokemon(newPokemonID) {
     removeSwipeFunction();
     swipeFunction(selectedPokemonDetails);
     removeLoadingSpinner();
+}
+
+async function backToPokedex() {
+    try {
+        renderStandardStructure();
+        displayLoadingSpinner();
+        await loadPokemonListWithCache();
+        await displayPokemonList(); 
+        renderMorePokemonButton();
+        removeLoadingSpinner();
+    } catch (error) {
+        console.error('Error going back to Pokedex:', error);
+    }
 }
 
 
