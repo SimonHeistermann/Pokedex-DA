@@ -6,7 +6,6 @@ const searchLimit = 10;
 async function fetchAllPokemon() {
     const cachedAllPokemon = localStorage.getItem('allPokemon');
     if (cachedAllPokemon) {
-        console.log('Loaded all Pokémon from cache.');
         allPokemon = JSON.parse(cachedAllPokemon);
     } else {
         try {
@@ -27,6 +26,7 @@ async function filterPokemon(event) {
             .filter(pokemon => pokemon.name.includes(input))
             .slice(0, searchLimit);
         await displayFilteredPokemonList();
+        currentPage = 'search';
     }
     await ifEmptySearch(input);
     removeLoadingSpinner();
@@ -49,6 +49,7 @@ function renderFilteredPokemonList(container, pokemon) {
 
 async function ifEmptySearch(input) {
     if (input === "") {
+        currentPage = 'home';
         const contentRef = document.getElementById('pokedex_section');
         contentRef.innerHTML = "";
         await displayPokemonListAfterSearch();

@@ -8,6 +8,15 @@ let offset = 0;
 let pokemonDetails;
 let pokemonDetailsCache = {};
 
+const natures = [
+    "Hardy", "Lonely", "Brave", "Adamant", "Naughty", 
+    "Bold", "Docile", "Relaxed", "Impish", "Lax", 
+    "Timid", "Hasty", "Serious", "Jolly", "Naive", 
+    "Modest", "Mild", "Quiet", "Bashful", "Rash", 
+    "Calm", "Gentle", "Sassy", "Careful", "Quirky", 
+    "Mild", "Hasty"
+];
+
 let onTouchStart, onTouchEnd;
 
 
@@ -37,7 +46,6 @@ function renderStandardStructure() {
 async function loadPokemonListWithCache() {
     const cachedList = localStorage.getItem('pokemonList');
     if (cachedList) {
-        console.log('Loaded Pokémon list from cache.');
         pokemonList = JSON.parse(cachedList);
     } else {
         await fetchPokemonList();
@@ -116,6 +124,7 @@ async function openPokemonDetails(pokemonID) {
     const pokemonDescription = await fetchPokemonDescription(pokemonID);
     openOverlay(selectedPokemonDetails, pokemonDescription);
     removeLoadingSpinner();
+    fixateScrollingOnBody();
 }
 
 async function getPokemonDetails(pokemonID) {
@@ -128,8 +137,8 @@ function openOverlay(selectedPokemonDetails, pokemonDescription) {
     currentDetails = "about";
     renderDetailedStructure(selectedPokemonDetails);
     renderDetailedAbout(selectedPokemonDetails, pokemonDescription);
-    fixateScrollingOnBody();
     swipeFunction(selectedPokemonDetails);
+    fixateScrollingOnBody();
 }
 
 function closeOverlay() {
@@ -181,6 +190,7 @@ async function openDetailedStats(pokemonID, navButtonRef) {
     renderDetailedStats(selectedPokemonDetails);
     await loadDynamicNatureDescription(selectedPokemonDetails, natureName);
     removeLoadingSpinner();
+    fixateScrollingOnBody();
 }
 
 async function renderDetailedStats(pokemon) {
@@ -199,17 +209,10 @@ async function openDetailedAbout(pokemonID, navButtonRef) {
     changeNavButtonStyling(navButtonRef);
     renderDetailedAbout(selectedPokemonDetails, pokemonDescription);
     removeLoadingSpinner();
+    fixateScrollingOnBody();
 }
 
 function getRandomNatureName() {
-    const natures = [
-        "Hardy", "Lonely", "Brave", "Adamant", "Naughty", 
-        "Bold", "Docile", "Relaxed", "Impish", "Lax", 
-        "Timid", "Hasty", "Serious", "Jolly", "Naive", 
-        "Modest", "Mild", "Quiet", "Bashful", "Rash", 
-        "Calm", "Gentle", "Sassy", "Careful", "Quirky", 
-        "Mild", "Hasty"
-    ];
     return natures[Math.floor(Math.random() * natures.length)];
 }
 
@@ -268,10 +271,12 @@ async function getAndRenderPrevOrNextPokemon(newPokemonID) {
     removeSwipeFunction();
     swipeFunction(selectedPokemonDetails);
     removeLoadingSpinner();
+    fixateScrollingOnBody();
 }
 
 async function backToPokedex() {
     try {
+        currentPage = 'home';
         renderStandardStructure();
         displayLoadingSpinner();
         await loadPokemonListWithCache();
@@ -282,6 +287,9 @@ async function backToPokedex() {
         console.error('Error going back to Pokedex:', error);
     }
 }
+
+
+
 
 
 

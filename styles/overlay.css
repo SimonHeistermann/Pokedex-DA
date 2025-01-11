@@ -5,8 +5,8 @@
     margin-inline: auto;
     padding-inline: clamp(16px, 6vw, 64px);
     padding-top: 32px;
-    position: fixed;
     z-index: 1000;
+    position: fixed;
     top: 0;
     left: 0;
     overflow: hidden;

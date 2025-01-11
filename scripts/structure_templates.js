@@ -4,9 +4,6 @@ function renderHTMLStandardStructure() {
                 <div class="header__container">
                     <div class="pokeball__background"></div>
                     <div class="header__box">
-                        <button class="menu__button">
-                            <img src="./assets/icons/menu_icon_white.png" alt="Menu">
-                        </button>
                         <h1 class="header__headline">Welches Pokémon suchst du?</h1>
                         <div class="header__searchbox">
                             <form onsubmit="filterPokemon(event)" class="searchbar__container">
@@ -54,7 +51,9 @@ function renderHTMLOverlayStructure() {
     return  `
             <div class="pokeball__background"></div>
             <div class="pokeball__background2"></div>
-            <div id="mpokemon_details" class="mpokemon__details" onclick="event.stopPropagation()">
+            <div class="overlay__contentbox">
+                <div id="mpokemon_details" class="mpokemon__details" onclick="event.stopPropagation()">
+                </div>
             </div>
             `;
 }
@@ -76,10 +75,10 @@ function renderHTMLDetailedStructure(pokemon) {
             </div>
             <div class="details__centralbox ${getBackgroundWithID(pokemon.id)}">
                 <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}">
-                <button onclick="openPrevPokemon(${pokemon.id})" class="prev__pokemonbutton ${pokemon.id === 1 ? 'd__none' : ''}">
+                <button onclick="openPrevPokemon(${pokemon.id})" class="prev__pokemonbutton ${pokemon.id === 1 ? 'd__none' : ''} ${currentPage === 'home' ? '' : 'd__none'}">
                     <img src="./assets/icons/prev_pokemon_icon_white.png" alt="previos pokemon">
                 </button>
-                <button onclick="openNextPokemon(${pokemon.id})" class="next__pokemonbutton">
+                <button onclick="openNextPokemon(${pokemon.id})" class="next__pokemonbutton ${currentPage === 'home' ? '' : 'd__none'}">
                     <img src="./assets/icons/next_pokemon_icon_white.png" alt="next pokemon">
                 </button>
                 <div class="types__container">
@@ -112,9 +111,6 @@ function renderHTMLFavoritesStructure() {
                 <div class="header__container">
                     <div class="pokeball__background"></div>
                     <div class="header__box">
-                        <button class="menu__button">
-                            <img src="./assets/icons/menu_icon_white.png" alt="Menu">
-                        </button>
                         <div class="favorites__headline">
                             <h1 class="header__headline">Deine Favoriten</h1>
                             <button onclick="backToPokedex()" id="refresh_button" class="favorites__button">

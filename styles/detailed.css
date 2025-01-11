@@ -1,7 +1,14 @@
+.overlay__contentbox {
+    position: relative;
+    overflow-y: auto;
+    max-height: 100vh;  
+}
+
 .mpokemon__details {
     display: flex;
     flex-direction: column;
     gap: 32px;
+    position: relative;
 }
 
 .details__header {

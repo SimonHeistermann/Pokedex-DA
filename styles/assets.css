@@ -101,3 +101,7 @@
     height: 32px;
     width: 32px;
 }
+
+.overflow__scroll {
+    overflow: scroll;
+}
