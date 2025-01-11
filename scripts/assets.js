@@ -133,4 +133,9 @@ function removeLoadingSpinner() {
     releaseScrollOnBody();
 }
 
+function toggleMorePokemonButton(variable) {
+    let buttonRef = document.getElementById('morepokemon_button');
+    buttonRef.onclick = variable;
+}
+
 

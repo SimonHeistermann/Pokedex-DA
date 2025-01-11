@@ -60,7 +60,7 @@ function renderHTMLDetailedAbout(pokemon, pokemonDescription) {
 
 function renderHTMLMorePokemonButton() {
     return  `
-            <button class="morepokemon__button" onclick="displayMorePokemon()">
+            <button id="morepokemon_button" class="morepokemon__button" onclick="displayMorePokemon()">
                 <img src="./assets/icons/new_pokemon_icon_white.png" alt="Pokeball">
                 MORE
             </button>

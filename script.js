@@ -173,12 +173,13 @@ function renderDetailedAbout(pokemon, pokemonDescription) {
 }
 
 async function displayMorePokemon() {
+    toggleMorePokemonButton(null);
     displayLoadingSpinner();
     offset += limit;
     await fetchPokemonList();
     await displayPokemonList();
     removeLoadingSpinner();
-
+    toggleMorePokemonButton(displayMorePokemon);
 }
 
 async function openDetailedStats(pokemonID, navButtonRef) {
@@ -235,12 +236,12 @@ async function loadDynamicNatureDescription(pokemon, natureName) {
     if (natureName) {
         const natureDetails = await fetchNature(natureName);
         if (natureDetails) {
-            const increasedStat = natureDetails.increased_stat?.name || "none";
-            const decreasedStat = natureDetails.decreased_stat?.name || "none";
-            const description = `Based on this Pokémon's stats, we consider the best nature for ${capitalizeFirstLetter(pokemon.name)} to have is <b class="naturetext__bold">${natureName}</b>. This will increase its <b class="naturetext__bold">${increasedStat}</b> and decrease its <b class="naturetext__bold">${decreasedStat}</b> stats.`;
+            const increasedStat = natureDetails.increased_stat?.name || "keinen";
+            const decreasedStat = natureDetails.decreased_stat?.name || "keinen";
+            const description = `Basierend auf den Werten dieses Pokémon, halten wir die beste Natur für ${capitalizeFirstLetter(pokemon.name)} für <b class="naturetext__bold">${natureName}</b>. Diese wird seinen <b class="naturetext__bold">${increasedStat}</b> Wert erhöhen und seinen <b class="naturetext__bold">${decreasedStat}</b> Wert verringern.`;
             contentRef.innerHTML = description;
-        } else contentRef.innerHTML = "Nature details could not be loaded.";
-    } else contentRef.innerHTML = "Nature could not be determined.";
+        } else contentRef.innerHTML = "Naturdetails konnten nicht geladen werden.";
+    } else contentRef.innerHTML = "Natur konnte nicht bestimmt werden.";
 }
 
 async function openNextPokemon(pokemonID) {

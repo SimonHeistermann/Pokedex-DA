@@ -127,6 +127,7 @@ nav button {
     padding-bottom: 8px;
     max-height: 39px;
     position: relative; 
+    cursor: pointer;
 }
 
 nav button::after {
