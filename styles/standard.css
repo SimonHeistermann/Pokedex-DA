@@ -32,6 +32,7 @@ h3 {
     font-size: 16px;
     font-weight: 400;
 }
+
 h4 {
     font-size: 16px;
     font-weight: 500;
@@ -73,10 +74,19 @@ select:focus {
     display: none !important;
 }
 
+.d__flex {
+    display: flex !important;
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   appearance: none;
   margin: 0;
+}
+
+button {
+    cursor: pointer;
+    border: unset;
 }
 
 @media(max-width: 600px) {
