@@ -1,7 +1,7 @@
 footer {
     min-height: 60px;
     background: #ffffff;
-    box-shadow: 1px -3px 8px 0px #00000054;
+    box-shadow: 2px -1px 8px 0px #00000054;
     display: flex;
     align-items: center;
 }

@@ -1,15 +1,16 @@
 .overlay {
     background-color: #5b5b5b;
-    min-height: 100vh;
+    height: 100vh;
     width: min(100%, 1920px);
     margin-inline: auto;
+    padding: 16px 0px;
     padding-inline: clamp(16px, 6vw, 64px);
-    padding-top: 32px;
     z-index: 1000;
     position: fixed;
     top: 0;
     left: 0;
     overflow: hidden;
+    z-index: 100
 }
 
 .loadingspinner__overlay {
@@ -28,6 +29,8 @@
     align-items: center;
     justify-content: center;
     pointer-events: none;
+    user-select: none;
+    z-index: 1100;
 }
 
 .loadingspinner__box {

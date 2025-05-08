@@ -69,7 +69,7 @@ function renderHTMLDetailedStructure(pokemon) {
                     <h1>${capitalizeFirstLetter(pokemon.name)}</h1>
                     <h3>${formatId(pokemon.id)}</h3>
                 </div>
-                <button onclick="toggleToFavorites(${pokemon.id})" class="heart__button">
+                <button onclick="toggleToFavorites(${pokemon.id}, event)" class="heart__button">
                     <img class="${isFavorite ? 'is__favorite' : ''}" src="./assets/icons/heart_icon_white.png" alt="Heart">
                 </button>
             </div>

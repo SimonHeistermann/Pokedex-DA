@@ -115,8 +115,8 @@ function renderHTMLDetailedStats(pokemon) {
                     </div>
                 </div>
             </div>
-            <div class="nature__description" id="nature_description">
+            <p class="nature__description" id="nature_description">
                             
-            </div>
+            </p>
             `
 }

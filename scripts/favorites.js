@@ -1,10 +1,15 @@
 let favoritePokemons = [];
 
 
-async function toggleToFavorites(pokemonID) {
+async function toggleToFavorites(pokemonID, event) {
+    if(event) {
+        event.stopPropagation();
+        event.preventDefault();
+    }
     const pokemon = favoritePokemons.find(item => item.id === pokemonID);
     if (pokemon) await removeFromFavorites(pokemonID, pokemon);
     else await addToFavorites(pokemonID);
+    fixateScrollingOnBody();
 }
 
 async function addToFavorites(pokemonID) {
