@@ -1,3 +1,9 @@
+/**
+ * Renders the HTML for a Pokémon card, displaying its name, ID, image, and types.
+ *
+ * @param {Object} pokemon - The Pokémon object to render the card for.
+ * @returns {string} The HTML string for the Pokémon card.
+ */
 function renderPokemonCardHTML(pokemon) {
     const primaryType = pokemon.types[0]?.type.name;
     const backgroundClass = getBackgroundClass(primaryType);
@@ -24,6 +30,13 @@ function renderPokemonCardHTML(pokemon) {
     `;
 }
 
+/**
+ * Renders the detailed "About" section for a Pokémon, including its weight, height, abilities, and description.
+ *
+ * @param {Object} pokemon - The Pokémon object to display the "About" information for.
+ * @param {string} pokemonDescription - The description of the Pokémon.
+ * @returns {string} The HTML string for the "About" section.
+ */
 function renderHTMLDetailedAbout(pokemon, pokemonDescription) {
     const weightKg = (pokemon.weight / 10).toFixed(1);
     const weightLbs = (weightKg * 2.20462).toFixed(1); 
@@ -39,7 +52,7 @@ function renderHTMLDetailedAbout(pokemon, pokemonDescription) {
                             <img src="./assets/icons/scale_icon_white.png" alt="Scale">
                             <p class="weightandheight__text">${weightKg} kg (${weightLbs} lbs)</p>
                         </div>
-                        <p>Gewicht</p>
+                        <p>Weight</p>
                     </div>
                     <div class="seperator"></div>
                     <div class="weightandheight__box">
@@ -47,7 +60,7 @@ function renderHTMLDetailedAbout(pokemon, pokemonDescription) {
                             <img src="./assets/icons/height_icon_white.png" alt="Ruler">
                             <p class="weightandheight__text">${heightM} m (${formatHeightFeet(heightFt)})</p>
                         </div>
-                        <p>Größe</p>
+                        <p>Height</p>
                     </div>
                 </div>
                 <div class="rest__informationbox">
@@ -58,6 +71,11 @@ function renderHTMLDetailedAbout(pokemon, pokemonDescription) {
             `;
 }
 
+/**
+ * Renders a "More Pokémon" button that allows the user to load more Pokémon.
+ *
+ * @returns {string} The HTML string for the "More Pokémon" button.
+ */
 function renderHTMLMorePokemonButton() {
     return  `
             <button id="morepokemon_button" class="morepokemon__button" onclick="displayMorePokemon()">
@@ -67,6 +85,12 @@ function renderHTMLMorePokemonButton() {
             `;  
 }
 
+/**
+ * Renders the detailed "Stats" section for a Pokémon, including its individual stats and progress bars.
+ *
+ * @param {Object} pokemon - The Pokémon object to display the stats for.
+ * @returns {string} The HTML string for the "Stats" section.
+ */
 function renderHTMLDetailedStats(pokemon) {
     const stats = getPokemonStats(pokemon);
     let topTwoStats = getTopTwoStats(stats);

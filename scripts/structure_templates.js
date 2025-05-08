@@ -1,3 +1,8 @@
+/**
+ * Renders the standard HTML structure for the main page, including the header, search bar, and main content section.
+ *
+ * @returns {string} The HTML string for the standard structure.
+ */
 function renderHTMLStandardStructure() {
     return  `
             <header>
@@ -8,12 +13,12 @@ function renderHTMLStandardStructure() {
                         <div class="header__searchbox">
                             <form onsubmit="filterPokemon(event)" class="searchbar__container">
                                 <label for="search_input">
-                                    <img class="searchbar__logo" src="./assets/icons/magnifier_icon_white.png" alt="Lupe-Icon">
+                                    <img class="searchbar__logo" src="./assets/icons/magnifier_icon_white.png" alt="Magnifying glass icon">
                                 </label>
                                 <input class="searchbar" oninput="filterPokemon(event)" id="search_input" type="text" placeholder="Suche Pokémon">
                             </form>
                             <button onclick="openFavoritePokemons()" id="refresh_button" class="favorites__button">
-                                <img src="./assets/icons/favorites_icon_white.png" alt="Refresh">
+                                <img src="./assets/icons/favorites_icon_white.png" alt="Favorites">
                             </button>
                         </div>
                     </div>
@@ -23,7 +28,7 @@ function renderHTMLStandardStructure() {
                 <div class="pokeball__background2"></div>
                 <div id="pokedex_section" class="pokedex__section">
                 </div>
-                <div class="morepokemonbutton__section" id=morepokemonbutton_section></div>
+                <div class="morepokemonbutton__section" id="morepokemonbutton_section"></div>
             </main>
             <div onclick="closeOverlay()" class="overlay d__none" id="overlay"></div>
             <div id="loadingspinner_overlay" class="loadingspinner__overlay d__none">
@@ -47,6 +52,11 @@ function renderHTMLStandardStructure() {
             `;
 }
 
+/**
+ * Renders the overlay HTML structure for displaying Pokémon details.
+ *
+ * @returns {string} The HTML string for the overlay structure.
+ */
 function renderHTMLOverlayStructure() {
     return  `
             <div class="pokeball__background"></div>
@@ -58,6 +68,12 @@ function renderHTMLOverlayStructure() {
             `;
 }
 
+/**
+ * Renders the detailed structure for displaying Pokémon information.
+ *
+ * @param {Object} pokemon - The Pokémon object to display the details for.
+ * @returns {string} The HTML string for the detailed structure.
+ */
 function renderHTMLDetailedStructure(pokemon) {
     const isFavorite = favoritePokemons.some(item => item.id === pokemon.id);
     return  `
@@ -76,10 +92,10 @@ function renderHTMLDetailedStructure(pokemon) {
             <div class="details__centralbox ${getBackgroundWithID(pokemon.id)}">
                 <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}">
                 <button onclick="openPrevPokemon(${pokemon.id})" class="prev__pokemonbutton ${pokemon.id === 1 ? 'd__none' : ''} ${currentPage === 'home' ? '' : 'd__none'}">
-                    <img src="./assets/icons/prev_pokemon_icon_white.png" alt="previos pokemon">
+                    <img src="./assets/icons/prev_pokemon_icon_white.png" alt="Previous Pokémon">
                 </button>
                 <button onclick="openNextPokemon(${pokemon.id})" class="next__pokemonbutton ${currentPage === 'home' ? '' : 'd__none'}">
-                    <img src="./assets/icons/next_pokemon_icon_white.png" alt="next pokemon">
+                    <img src="./assets/icons/next_pokemon_icon_white.png" alt="Next Pokémon">
                 </button>
                 <div class="types__container">
                     <div class="type__box color__${pokemon.types[0].type.name}">
@@ -105,6 +121,11 @@ function renderHTMLDetailedStructure(pokemon) {
             `;
 }
 
+/**
+ * Renders the structure for the favorites view, including a header and the list of favorite Pokémon.
+ *
+ * @returns {string} The HTML string for the favorites structure.
+ */
 function renderHTMLFavoritesStructure() {
     return  `
             <header>
@@ -112,9 +133,9 @@ function renderHTMLFavoritesStructure() {
                     <div class="pokeball__background"></div>
                     <div class="header__box">
                         <div class="favorites__headline">
-                            <h1 class="header__headline">Deine Favoriten</h1>
+                            <h1 class="header__headline">Your Favorites</h1>
                             <button onclick="backToPokedex()" id="refresh_button" class="favorites__button">
-                                <img src="./assets/icons/home_icon_white.png" alt="Refresh">
+                                <img src="./assets/icons/home_icon_white.png" alt="Home">
                             </button>
                         </div>
                     </div>
