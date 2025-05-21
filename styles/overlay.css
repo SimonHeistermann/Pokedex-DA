@@ -1,7 +1,7 @@
 .overlay {
     background-color: #5b5b5b;
     height: 100vh;
-    width: min(100%, 1920px);
+    width: 100%;
     margin-inline: auto;
     padding: 16px 0px;
     padding-inline: clamp(16px, 6vw, 64px);
@@ -16,7 +16,7 @@
 .loadingspinner__overlay {
     background-color: #5b5b5bc5;
     min-height: 100vh;
-    width: min(100%, 1920px);
+    width: 100%;
     margin-inline: auto;
     padding-inline: clamp(16px, 6vw, 64px);
     padding-top: 32px;
