@@ -51,16 +51,21 @@ function renderStandardStructure() {
 }
 
 /**
- * Loads the Pokémon list from cache if available,
- * otherwise fetches it from the API and caches it.
+ * Loads the Pokémon list from localStorage if valid,
+ * otherwise fetches it from the API and updates the cache.
+ * Ensures data integrity and prevents using an empty or corrupted cache.
  */
 async function loadPokemonListWithCache() {
-    const cachedList = localStorage.getItem('pokemonList');
-    if (cachedList) {
-        pokemonList = JSON.parse(cachedList);
-    } else {
-        await fetchPokemonList();
-        localStorage.setItem('pokemonList', JSON.stringify(pokemonList));
+    try {
+        const parsedList = getValidCachedList();
+        if (parsedList) {
+            pokemonList = parsedList;
+        } else {
+            await updatePokemonListFromAPI();
+        }
+    } catch (error) {
+        console.warn("Cache error, fetching new data:", error);
+        await updatePokemonListFromAPI();
     }
 }
 

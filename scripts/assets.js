@@ -262,3 +262,23 @@ async function backToPokedex() {
         console.error('Error going back to Pokedex:', error);
     }
 }
+
+/**
+ * Retrieves and validates the cached Pokémon list from localStorage.
+ * @returns {Array|null} The parsed list if it's a non-empty array, otherwise null.
+ */
+function getValidCachedList() {
+    const cached = localStorage.getItem('pokemonList');
+    const list = JSON.parse(cached);
+    return Array.isArray(list) && list.length > 0 ? list : null;
+}
+
+/**
+ * Fetches the Pokémon list from the API and updates the localStorage cache.
+ * Ensures the cache stays in sync with the latest fetched data.
+ * @returns {Promise<void>}
+ */
+async function updatePokemonListFromAPI() {
+    await fetchPokemonList();
+    localStorage.setItem('pokemonList', JSON.stringify(pokemonList));
+}

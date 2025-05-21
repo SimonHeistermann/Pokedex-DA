@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" translate="no">
 <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="icon" type="image/x-icon" href="./assets/icons/new_pokemon_icon_black.png" media="(prefers-color-scheme: light)">
@@ -20,6 +21,11 @@
     <link rel="stylesheet" type="text/css" href="./styles/footer.css">
     <link rel="stylesheet" type="text/css" href="./styles/assets.css">
 
+</head>
+<body id="body">
+    <div class="pokeball__background"></div>
+    <div class="pokeball__background2"></div>
+
     <script src="./script.js"></script>
     <script src="./scripts/structure_templates.js"></script>
     <script src="./scripts/templates.js"></script>
@@ -28,9 +34,10 @@
     <script src="./scripts/swipe.js"></script>
     <script src="./scripts/favorites.js"></script>
     <script src="./scripts/assets.js"></script>
-</head>
-<body id="body" onload="init()">
-    <div class="pokeball__background"></div>
-    <div class="pokeball__background2"></div>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+          init();
+        });
+    </script>
 </body>
 </html>
