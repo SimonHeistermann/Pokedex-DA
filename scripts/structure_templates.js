@@ -44,6 +44,11 @@ function renderHTMLStandardStructure() {
             <footer>
                 <div class="footer__container">
                     <div class="footer__containerbottom">
+                        <a class="footer__linksextra" href="./impressum.html">Impressum</a>
+                        <a class="footer__linksextra" href="./privacy-policy.html">Privacy Policy</a>
+                        <a class="footer__linksextra" href="./disclaimer.html">Disclaimer</a>
+                    </div>
+                    <div class="footer__containerbottom">
                         <span class="footer__credits">created by Simon Heistermann &copy;</span>
                         <a class="footer__linksextra" href="https://icons8.com/" target="_blank" rel="noopener noreferrer">Icons by icons8.com</a>
                     </div>
@@ -159,6 +164,11 @@ function renderHTMLFavoritesStructure() {
             </div>
             <footer>
                 <div class="footer__container">
+                    <div class="footer__containerbottom">
+                        <a class="footer__linksextra" href="./impressum.html">Impressum</a>
+                        <a class="footer__linksextra" href="./privacy-policy.html">Privacy Policy</a>
+                        <a class="footer__linksextra" href="./disclaimer.html">Disclaimer</a>
+                    </div>
                     <div class="footer__containerbottom">
                         <span class="footer__credits">created by Simon Heistermann &copy;</span>
                         <a class="footer__linksextra" href="https://icons8.com/" target="_blank" rel="noopener noreferrer">Icons by icons8.com</a>

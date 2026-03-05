@@ -1,0 +1,140 @@
+.legal__headerbox {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.legal__backlink {
+    color: #ff5c5c;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.legal__backlink:hover {
+    color: #ff8a8a;
+}
+
+.legal__content {
+    max-width: 800px;
+    line-height: 1.7;
+}
+
+.legal__content section {
+    margin-bottom: 32px;
+}
+
+.legal__content h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #ff5c5c;
+}
+
+.legal__content h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    margin-top: 16px;
+}
+
+.legal__content p {
+    margin-bottom: 8px;
+}
+
+.legal__content a {
+    color: #ff5c5c;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.legal__content a:hover {
+    color: #ff8a8a;
+}
+
+.legal__content ul,
+.legal__content ol {
+    padding-left: 24px;
+    margin-bottom: 8px;
+}
+
+.legal__content li {
+    margin-bottom: 4px;
+}
+
+.legal__content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-size: 15px;
+}
+
+.legal__content th,
+.legal__content td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #444;
+}
+
+.legal__content th {
+    color: #ff5c5c;
+    font-weight: 600;
+}
+
+.legal__toc {
+    margin-bottom: 32px;
+    padding: 16px 20px;
+    background-color: #2c2c2c;
+    border-radius: 8px;
+}
+
+.legal__toc h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.legal__toc ol {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.legal__toc li {
+    margin-bottom: 2px;
+}
+
+.legal__notice {
+    background-color: #2c2c2c;
+    border-left: 4px solid #ff5c5c;
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 32px;
+}
+
+.legal__notice--prominent {
+    border-left-width: 6px;
+}
+
+.legal__notice h2 {
+    margin-bottom: 8px;
+}
+
+.legal__notice p {
+    margin-bottom: 0;
+}
+
+.legal__updated {
+    margin-top: 32px;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+    .legal__content table {
+        font-size: 13px;
+    }
+
+    .legal__content th,
+    .legal__content td {
+        padding: 8px 6px;
+    }
+}
