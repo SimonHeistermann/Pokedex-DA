@@ -5,6 +5,17 @@
     width: 100%;
 }
 
+body:has(.legal__headerbox) .header__container {
+    width: min(100%, 1920px);
+    margin-inline: auto;
+    margin-top: 64px;
+    padding-inline: clamp(16px, 6vw, 64px);
+}
+
+body:has(.legal__headerbox) main {
+    margin-bottom: 48px;
+}
+
 .legal__backlink {
     color: #ff5c5c;
     font-size: 14px;
@@ -18,6 +29,7 @@
 
 .legal__content {
     max-width: 800px;
+    margin-inline: auto;
     line-height: 1.7;
 }
 
